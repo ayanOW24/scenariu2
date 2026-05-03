@@ -7,8 +7,8 @@
 <style>
 body {
   font-family: Arial;
-  white-space: pre-wrap;
   padding: 20px;
+  white-space: pre-wrap;
 }
 
 .line {
@@ -17,19 +17,17 @@ body {
   border: 1px solid #ddd;
 }
 
-/* 🔒 Bender ascuns = blur roz */
-.vernon-hidden {
+/* ascuns */
+.hidden {
   color: transparent;
-  text-shadow: 0 0 10px rgba(255, 105, 180, 0.9);
+  text-shadow: 0 0 8px rgba(255,105,180,0.8);
   background: #ffe4f2;
-  cursor: pointer;
 }
 
-/* 👀 Bender vizibil = highlight roz puternic */
-.vernon-visible {
+/* vizibil highlight */
+.visible {
   background: #ff69b4;
   color: black;
-  cursor: pointer;
 }
 </style>
 </head>
@@ -37,7 +35,20 @@ body {
 <body>
 
 <h2>Scenariu</h2>
+  
+<label>Alege personaj:</label>
+<select id="character">
+  <option value="BENDER">Bender</option>
+  <option value="VERNON">Fry</option>
+  <option value="ANDREW">Leela</option>
+  <option value="CLAIRE">Leela</option>
+  <option value="ALLISON">Leela</option>
+  <option value="BRIAN">Leela</option>
+  <option value="CARL">Leela</option>
+</select>
 
+<br><br>
+  
 <textarea id="scriptInput" style="width:100%;height:180px;">
 The breakfast club 
 
@@ -1600,6 +1611,7 @@ SFÂRȘIT
 <script>
 function render() {
   const text = document.getElementById("scriptInput").value;
+  const selected = document.getElementById("character").value.toLowerCase();
   const lines = text.split("\n");
   const out = document.getElementById("output");
 
@@ -1611,16 +1623,16 @@ function render() {
     const div = document.createElement("div");
     div.classList.add("line");
 
-    const isVernon = /^vernon/i.test(line.trim());
+    const match = line.trim().toLowerCase().startsWith(selected);
 
     div.textContent = line;
 
-    if (isVernon) {
-      div.classList.add("vernon-hidden");
+    if (match) {
+      div.classList.add("hidden");
 
       div.onclick = () => {
-        div.classList.toggle("vernon-hidden");
-        div.classList.toggle("vernon-visible");
+        div.classList.toggle("hidden");
+        div.classList.toggle("visible");
       };
     }
 
