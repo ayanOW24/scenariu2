@@ -31,6 +31,13 @@ body {
   cursor: pointer;
   min-height: 20px;
 }
+.hidden, .visible {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 35px;
+  padding: 6px;
+}
 </style>
 </head>
 
@@ -1661,7 +1668,7 @@ function render() {
       const name = document.createElement("strong");
       name.textContent = line.substring(0, colonIndex + 1);
 
-      const dialogue = document.createElement("span");
+      const dialogue = document.createElement("div");
       dialogue.textContent = line.substring(colonIndex + 1);
       dialogue.classList.add("hidden");
 
